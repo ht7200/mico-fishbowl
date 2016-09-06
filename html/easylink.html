@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<!--head主要完成页面的范围定义以及文件的引用-->
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<title>配网界面</title>
+		<link rel="stylesheet" href="../css/mui.css" />
+		<link rel="stylesheet" href="../css/easylink.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+
+		<script type="text/javascript" src="../js/api.js"></script>
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+		<script type="text/javascript" src="../js/easylink.js"></script>
+
+	</head>
+
+	<body>
+		<!--头部导航,bug，设置距离状态栏20px-->
+		<header class="mui-plus mui-statusbar mui-statusbar-offset" style="background: #F9F9F9;">
+			<div class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;" onclick="quit_easylink_page()"></a>
+				<h1 class="mui-title">连接水族箱</h1>
+			</div>
+		</header>
+		<div class="mui-content" style="padding-top: 64px">
+			<div id="easylink">
+				<div class="img-wifi">
+					<img src="../img/wifi.png" />
+					<h4>连接Wi-Fi</h4>
+					<h5>请将水族箱设置为配网模式</h5>
+				</div>
+				<div class="mui-input-row mui-input-group flex-con" onclick="fnJumpSetting()">
+					<label><span class="mui-icon wifi_iconfont_ssid icon-wifi_name"></span></label>
+					<!--<div class="flex-con"><p class="selectWiFi">请选择设备工作 Wi-Fi</p></div>-->
+					<div class="mui-input mui-input">
+						<p class="selectWiFi">请选择设备工作 Wi-Fi</p>
+					</div>
+				</div>
+				<div class="mui-input-row mui-input-group mui-password">
+					<label><span class="mui-icon wifi_iconfont_key icon-wifi_key"></span></label>
+					<input type="password" class="mui-input-password" id="easylink_wifi_key" placeholder="请输入 Wi-Fi 密码">
+				</div>
+
+				<div class="mui-content-padded">
+					<div class="link-area">
+						<a>配网说明，点这里</a>
+					</div>
+					<button id='button_easylink' class="mui-btn mui-btn-block mui-btn-primary" onclick="fnJumpMdnsPage()">开始配网</button>
+				</div>
+			</div>
+		</div>
+
+		<ul id="search_devices" class="mui-table-view" style="margin-top: 30px; display: none;">
+
+		</ul>
+	</body>
+
+	<script>
+		apiready = function() {
+			gizWifiSDK = api.require('gizWifiSDK');
+			fneasylinkPageInit();
+		}
+	</script>
+
+</html>

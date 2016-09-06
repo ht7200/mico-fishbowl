@@ -1,0 +1,86 @@
+.mui-bar {
+	height: 3em;
+	font-weight: bolder;
+	background-color: #258AFE;
+	font-family: "黑体";
+}
+
+.mui-title {
+	color: #fff;
+}
+
+.mui-content {
+	margin-top: 68px;
+}
+
+#login {
+	background-color: #3885F1;
+	border: 0;
+}
+
+.link-area a {
+	color: #6D6D72;
+	font-size: .9em;
+}
+
+
+.mui-input-group {
+	margin: 10px 15px;
+	border-radius: 8px;
+}
+
+.mui-input-group span {
+	position: absolute;
+	left: 1px;
+	top: -4px;
+}
+
+.mui-input-group:first-child {
+	margin-top: 40px;
+}
+
+.mui-input-group label {
+	width: 35%;
+}
+
+.mui-input-row label~input,
+.mui-input-row label~select,
+.mui-input-row label~textarea {
+	width: 65%;
+}
+
+.mui-input {
+	padding-top: 1em;
+}
+
+.mui-checkbox input[type=checkbox],
+.mui-radio input[type=radio] {
+	top: 6px;
+}
+
+.mui-content-padded {
+	margin-top: 25px;
+}
+
+.mui-btn {
+	padding: 10px;
+	background: #378DE4;
+	border: 0;
+	letter-spacing: .2em;
+}
+
+.get-check-code {
+	display: inline-block;
+	float: left !important;
+	font-size: .7em;
+	color: #fff;
+	width: 25% !important;
+	height: 80%;
+	margin: 3px 5%;
+	letter-spacing: 1px;
+	padding: 10px !important;
+}
+
+.get-check-code~input {
+	width: 65% !important;
+}

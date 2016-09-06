@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>Hello APP</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" href="../css/mui.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main_read.css" />
+		<script type="text/javascript" src="../js/api.js"></script>
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+		<script type="text/javascript" src="../js/main_read.js" ></script>
+	</head>
+
+	<body>
+		<div class="mui-content" id="m_mainlist">
+			<!--未绑定设备时显示以下内容-->
+			<div class="content-nodevice" id="m_main_no_device">
+				<img src="../img/backgroud.png" / style="width: 100%;">
+				<div class="inner-content">
+					<div class="btn-plus" onclick="open_easylinkPage()">
+						<span class="mui-icon iconfont icon-tianjia"></span>
+					</div>
+					<div class="text">
+						添加新设备
+					</div>
+					<div class="btn-try" onclick="fnExperience()">
+						<span class="mui-icon iconfont icon-xiaolvdashiicon02"></span> 先体验一下？
+					</div>
+				</div>
+			</div>
+			
+			<!--已绑定设备时显示以下内容-->
+			<div class="content-hasdevice" id="m_main_add_device">
+				<!--<div class="showdevice online">
+					<span class="mui-icon iconfont icon-wifi"></span>
+					<span class="mui-icon iconfont icon-chacha-copy"></span>
+					<h5 class="title">客厅水族箱</h5>
+					<h5 class="tem">23.<small>5℃</small></h5>
+					<div class="detail">
+						<span class="mui-icon iconfont icon-tubiao06 light"></span>
+						<span>今天</span>
+						<span>主缸已打开<big>4</big>小时</span>
+						<span>蓝藻灯已打开<big>4</big>小时</span>
+					</div>
+					<div class="status status1">
+						<span class="mui-icon iconfont icon-taiyang"></span>
+						<span>日出日落模式</span>
+					</div>
+				</div>
+				<div class="showdevice">
+					<span class="mui-icon iconfont icon-wifi"></span>
+					<span class="mui-icon iconfont icon-chacha-copy"></span>
+					<h5 class="title">客厅水族箱</h5>
+					<h5 class="tem">23.<small>5℃</small></h5>
+					<div class="detail">
+						<span class="mui-icon iconfont icon-tubiao06 light"></span>
+						<span>今天</span>
+						<span>主缸已打开<big>4</big>小时</span>
+						<span>蓝藻灯已打开<big>4</big>小时</span>
+					</div>
+					<div class="status status2">
+						<span class="mui-icon iconfont icon-taiyang"></span>
+						<span>设备已离线</span>
+					</div>
+				</div>-->
+			</div>
+		</div>
+
+	</body>
+
+	<script>
+		apiready = function() {
+			gizWifiSDK = api.require('gizWifiSDK');
+			gizWifiDevice = api.require('gizWifiDevice');
+			//页面开启就发现设备
+			fnMaingetBindDeviceList();
+
+			//下拉刷新
+			api.setRefreshHeaderInfo(refresh, function(ret, err) {
+				//在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+				fnMaingetBindDeviceList();
+				api.refreshHeaderLoadDone();
+			});
+		}
+	</script>
+
+</html>

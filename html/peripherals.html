@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/mui.css" />
+		<link rel="stylesheet" href="../css/peripherals.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<script type="text/javascript" src="../js/mui.js" ></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+		<script type="text/javascript" src="../js/peripherals.js"></script>
+	</head>
+
+	<body>
+		<!--头部导航,bug，设置距离状态栏20px-->
+		<header class="mui-plus mui-statusbar mui-statusbar-offset" style="background: #F9F9F9;">
+			<div class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;" onclick="quit_peripherals_page()"></a>
+				<h1 class="mui-title">设备操作</h1>
+			</div>
+		</header>
+		<div class="mui-content" id="m_peripherals">
+			<!--<ul id="list" class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-indexed-list-item list-title">我的客厅<span class="mui-pull-right">解绑设备<span></li>
+				<li class="mui-table-view-cell mui-indexed-list-item">MAC地址:<span class="mui-pull-right">AC:CF:28:83:F7:BE<span></li>
+				<li class="mui-table-view-cell mui-indexed-list-item">设备型号:<span class="mui-pull-right">OP001<span></li>				
+			</ul>
+			<ul id="list" class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-indexed-list-item list-title">我的公司<span class="mui-pull-right">解绑设备<span></li>
+				<li class="mui-table-view-cell mui-indexed-list-item">MAC地址:<span class="mui-pull-right">AC:CF:28:83:F7:BE<span></li>
+				<li class="mui-table-view-cell mui-indexed-list-item">设备型号:<span class="mui-pull-right">OP001<span></li>				
+			</ul>-->
+		</div>
+	</body>
+		
+	<script>
+		apiready = function() {
+			gizWifiSDK = api.require('gizWifiSDK');
+			gizWifiDevice = api.require('gizWifiDevice');
+			//页面开启就发现设备
+			fngetBindDeviceList();
+			
+			//下拉刷新
+			api.setRefreshHeaderInfo(refresh, function(ret, err) {
+				//在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+				fngetBindDeviceList();
+				api.refreshHeaderLoadDone();
+			});
+			
+		}
+	</script>
+
+</html>

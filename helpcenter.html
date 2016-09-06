@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>帮助中心</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.css">
+		<link rel="stylesheet" href="../css/person.css" />
+		<script type="text/javascript" src="../js/mui.js" ></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-plus mui-statusbar mui-statusbar-offset" style="background: #F9F9F9;">
+			<div class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;" onclick="quit_helpcenter_page()"></a>
+				<h1 class="mui-title">帮助中心</h1>
+			</div>
+		</header>
+		
+		<div class="mui-content">
+			<!--<div class="title">
+				这是webview模式选项卡中的第4个子页面，该页面展示一个常见的设置示例
+			</div>-->
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						如何使APP绑定设备？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						如何使APP解绑设备？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						同一个设备可以被多个账号绑定吗？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						使用智能设备有辐射吗？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						智能设备费电吗？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						智能设备安全吗？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						APP和智能设备必须在<br>同一局域网才能使用吗？
+					</a>
+				</li>
+			</ul>
+			
+		</div>
+		</style>
+	</body>
+	<script src="../js/mui.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+
+		function quit_helpcenter_page(){
+			closeWin("helpcenter");
+		}
+	</script>
+</html>

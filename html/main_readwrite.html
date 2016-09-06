@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/mui.css" />
+		<link rel="stylesheet" href="../css/main_readwrite.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<script type="text/javascript" src="../js/api.js"></script>
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+		<script type="text/javascript" src="../js/main_readwrite.js"></script>
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<!--头部导航,bug，设置距离状态栏20px-->
+		<header class="mui-plus mui-statusbar mui-statusbar-offset">
+			<div class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;" onclick="quit_main_read_write_page()"></a>
+				<h1 class="mui-title">客厅水族箱</h1>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="first-grid">
+				<div class="water-temp">
+					日出日落模式
+				</div>
+				<div class="taiyang">
+					<span class="mui-icon iconfont icon-taiyang">
+				</div>
+				<div class="number">
+					--.<small>-</small>
+				</div>			
+				<div class="describe">
+					鱼缸温度℃
+				</div>
+				<div class="comfort">
+					适宜
+				</div>
+				<div class="status">
+					工作正常<br />
+					<span id="StatAppBumpCur">水泵电流 -.--A</span>
+				</div>
+				<div class="sibian">
+					<span class="mui-icon iconfont icon-unlocked" id="m_childlock" onclick="fnchildlockOp()"></span>
+					<span class="mui-icon iconfont icon-fenxiang1"></span>
+					<span class="mui-icon iconfont icon-pump" id="m_pumplock" onclick="fnpumplockOp()"></span>
+				</div>
+				<span class="shoudong" id="" onclick="open_timesetting_Page()">
+					定时设置
+				</span>
+			</div>
+			<div class="light-box">
+				<h4>灯光设置</h4>
+				<div class="range" id="main-light-range">
+					<h5>主缸灯<span class='inline-range-val' id='main-light-val'>亮度:20%</span></h5>
+					<div class="mui-input-row mui-input-range">
+						<label><span class="mui-icon iconfont icon-taiyang1"></span></label>
+						<input type="range" id='main-light' value="20" min="0" max="100">
+					</div>
+				</div>
+				<div class="time">
+					<div class="mui-switch mui-switch-blue mui-active" id="main-light-switch">
+						<div class="mui-switch-handle"></div>
+					</div>
+					<!--<button id='mian-light-start' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">开启<span>08:00</span></button>-->
+					<!--<button id='mian-light-start' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">关闭<span>20:00</span></button>-->
+				</div>
+			</div>
+			<div class="light-box light-box-bottom">
+				<div class="range" id="sub-light-range">
+					<h5>蓝藻灯<span class='inline-range-val' id='sub-light-val'>亮度:20%</span></h5>
+					<div class="mui-input-row mui-input-range">
+						<label><span class="mui-icon iconfont icon-taiyang1"></span></label>
+						<input type="range" id='sub-light' value="20" min="0" max="100">
+					</div>
+				</div>
+				<div class="time">
+					<div class="mui-switch mui-switch-blue mui-active" id="sub-light-switch">
+						<div class="mui-switch-handle"></div>
+					</div>
+					<!--<button id='mian-light-start' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">开启<span>08:00</span></button>-->
+					<!--<button id='mian-light-start' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">关闭<span>20:00</span></button>-->
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.picker.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			release: true //监听离开屏幕
+		});
+		//监听input事件，获取range的value值，也可以直接element.value获取该range的值
+		var rangeList = document.querySelectorAll('input[type="range"]');
+		for(var i = 0, len = rangeList.length; i < len; i++) {
+			rangeList[i].addEventListener('change', function() {
+				if(this.id.indexOf('field') >= 0) {
+					//不执行
+					document.getElementById(this.id + '-input').value = this.value;
+				} else {
+					document.getElementById(this.id + '-val').innerHTML = '亮度:' + this.value + '%';
+					fnsetLed(this.id, this.value); //设置某个进度条的亮度
+				}
+			});
+		}
+
+		//主缸灯
+		document.getElementById("main-light-switch").addEventListener("toggle", function(event) {
+			//开关关闭时亮度不可调节且变灰
+			if(event.detail.isActive) {
+				document.getElementById("main-light").removeAttribute('disabled');
+				document.getElementById("main-light-range").setAttribute('class', 'range');
+			} else {
+				document.getElementById("main-light").setAttribute('disabled', 'disabled');
+				document.getElementById("main-light-range").setAttribute('class', 'range gray');
+			}
+			//数据处理
+			if(event.detail.isActive) {
+				WLedSW_open();
+			} else {
+				WLedSW_close();
+			}
+		});
+
+		//蓝藻灯
+		document.getElementById("sub-light-switch").addEventListener("toggle", function(event) {
+			//开关关闭时亮度不可调节且变灰
+			if(event.detail.isActive) {
+				document.getElementById("sub-light").removeAttribute('disabled');
+				document.getElementById("sub-light-range").setAttribute('class', 'range');
+			} else {
+				document.getElementById("sub-light").setAttribute('disabled', 'disabled');
+				document.getElementById("sub-light-range").setAttribute('class', 'range gray');
+			}
+			//数据处理
+			if(event.detail.isActive) {
+				BLedSW_open();
+			} else {
+				BLedSW_close();
+			}
+		});
+
+		apiready = function() {
+			gizWifiSDK = api.require('gizWifiSDK');
+			gizWifiDevice = api.require('gizWifiDevice');
+			fnfishbowlOp();
+		}
+	</script>
+
+</html>

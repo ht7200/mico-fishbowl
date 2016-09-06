@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="css/mui.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<script type="text/javascript" src="js/mui.js"></script>
+		
+	</head>
+
+	<body>
+		<header class="mui-plus mui-statusbar mui-statusbar-offset" style="background: #F9F9F9;">
+			<div class="mui-bar mui-bar-nav">
+				<h1 class="mui-title" id="title">设备列表</h1>
+				<!--<span class="mui-icon device_iconfont icon-shaoma mui-pull-left top_shortcut" id="QR_code" onclick="openWin('easylink','widget://html/easylink.html', false)"></span>
+				<span class="mui-icon device_iconfont icon-add3 mui-pull-right top_shortcut" id="add_device" onclick="openWin('easylink','widget://html/easylink.html', false)"></span>-->
+			</div>
+		</header>
+
+		<nav class="mui-bar mui-bar-tab" style="background: #F9F9F9;">
+			<a class="mui-tab-item mui-active">
+				<span class="mui-icon iconfont icon-yu"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+
+			<a class="mui-tab-item">
+				<span class="mui-icon iconfont icon-shangcheng"></span>
+				<span class="mui-tab-label">商城</span>
+			</a>
+
+			<a class="mui-tab-item">
+				<span class="mui-icon iconfont icon-shequ"></span>
+				<span class="mui-tab-label">社区</span>
+			</a>
+
+			<a class="mui-tab-item">
+				<span class="mui-icon iconfont icon-wode"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+
+		<script type="text/javascript" src="js/mui.js"></script>
+		<script src="js/config.js"></script>
+		<script type="text/javascript">
+			apiready = function() {
+				//设置状态栏文字为白色
+				api.setStatusBarStyle({
+					style: 'white',
+					color: '#fff'
+				});
+//				['gizWifiSDK', 'gizWifiDevice', 'aMap'].map(function() {
+//					window[arguments[0]] = api.require(arguments[0]);
+//				});
+				gizWifiSDK = api.require('gizWifiSDK');
+				startGizWitsSDK();
+
+				//判断用户是否已登录,如果缓存没有登录数据则跳出登录页面，如果有登录数据，则刷新token，继续下面的页面展示
+				//checkToken();
+
+				//tabbar工具条上注册tap手势并安排菜单切换
+				Register_event_and_switchBar();
+
+				//监听安卓返回键
+				Android_ListenKeyBack();
+
+				//创建并打开子页面
+				openFrameGroup();
+			}
+		</script>
+	</body>
+
+</html>

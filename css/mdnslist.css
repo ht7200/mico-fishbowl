@@ -1,0 +1,40 @@
+.mui-bar {
+	height: 3em;
+	font-weight: bolder;
+	background-color: #258AFE;
+	font-family: "黑体";
+}
+
+.mui-title {
+	font-family: "楷体";
+	color: #fff;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.mui-content {
+	margin-top: 90px;
+}
+
+.mui-icon-arrowright {
+	float: right;
+}
+
+.mui-icon-arrowright {
+	position: absolute;
+	right: .5em;
+	top: 30%;
+	font-size: .9em;
+	color: #6D6D72;
+}
+
+.list-title {
+	margin: 1em;
+}
+
+.mui-text-right{	
+	line-height: 35px;
+}
+.mui-table-view-chevron .mui-table-view-cell {
+    padding-right: 35px;
+}

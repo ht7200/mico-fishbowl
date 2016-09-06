@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/mui.css" />
+		<link rel="stylesheet" href="../css/timesetting.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<script type="text/javascript" src="../js/api.js"></script>
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+	</head>
+
+	<body>
+		<!--头部导航,bug，设置距离状态栏20px-->
+		<header class="mui-plus mui-statusbar mui-statusbar-offset">
+			<div class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;" onclick="quit_fakeTime_page()"></a>
+				<h1 class="mui-title">客厅水族箱</h1>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="content-card">
+				<h4>当前定时状态</h4>
+				<div class="mui-row now-status" id="main-light-satuts">
+					<span class="light-name">主缸灯</span>
+					<span class="num">--:--</span>
+					<span class="unit">开启</span>
+					<span class="num">--:--</span>
+					<span class="unit">关闭</span>
+					<span class="num">-%</span>
+					<span class="unit">亮度</span>
+				</div>
+				<div class="mui-row now-status" id="sub-light-satuts">
+					<span class="light-name">蓝藻灯</span>
+					<span class="num">--:--</span>
+					<span class="unit">开启</span>
+					<span class="num">--:--</span>
+					<span class="unit">关闭</span>
+					<span class="num">-%</span>
+					<span class="unit">亮度</span>
+				</div>
+			</div>
+			<div class="content-card">
+				<h4>定时设置</h4>
+				<div class="light-box">
+					<div class="range">
+						<h5>主缸灯<span class='inline-range-val' id='main-light-val'>亮度:20%</span></h5>
+						<div class="mui-input-row mui-input-range">
+							<label><span class="mui-icon iconfont icon-taiyang1"></span></label>
+							<input type="range" id='main-light' value="20" min="0" max="100">
+						</div>
+					</div>
+					<div class="time">
+						<button id='main-light-start' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">开启<span id='main-light-start-time'>08:00</span></button>
+						<button id='main-light-end' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">关闭<span id='main-light-end-time'>20:00</span></button>
+					</div>
+				</div>
+				<div class="light-box light-box-bottom">
+					<div class="range">
+						<h5>蓝藻灯<span class='inline-range-val' id='sub-light-val'>亮度:20%</span></h5>
+						<div class="mui-input-row mui-input-range">
+							<label><span class="mui-icon iconfont icon-taiyang1"></span></label>
+							<input type="range" id='sub-light' value="20" min="0" max="100">
+						</div>
+					</div>
+					<div class="time">
+						<button id='sub-light-start' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">开启<span id='sub-light-start-time'>08:00</span></button>
+						<button id='sub-light-end' data-options='{"type":"time"}' class="btn mui-btn mui-btn-block">关闭<span id='sub-light-end-time'>20:00</span></button>
+					</div>
+				</div>
+			</div>
+			<div class="content-card">
+				<h4>快速设置</h4>
+				<div class="mui-row quick-setting">
+					<span class="mui-icon iconfont icon-taiyang"></span>日出日落模式
+				</div>
+				<div class="mui-row quick-setting">
+					<span class="mui-icon iconfont icon-duoyun"></span>阴天模式
+				</div>
+			</div>
+			<div class="content-card">
+				<div class="btn-bottom" id="btn-bottom">
+					<button type="button" class="mui-btn pitch" id="stop">
+						停止定时
+					</button>
+					<button type="button" class="mui-btn " id="start">
+						开启定时
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.picker.min.js"></script>
+
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		//监听input事件，获取range的value值，也可以直接element.value获取该range的值
+		var rangeList = document.querySelectorAll('input[type="range"]');
+		for(var i = 0, len = rangeList.length; i < len; i++) {
+			rangeList[i].addEventListener('change', function() {
+				if(this.id.indexOf('field') >= 0) {
+					document.getElementById(this.id + '-input').value = this.value;
+				} else {
+					document.getElementById(this.id + '-val').innerHTML = '亮度:' + this.value + '%';
+				}
+			});
+		}
+
+		var btn_bottom = document.getElementById('btn-bottom');
+		var btns_bottom = btn_bottom.getElementsByTagName('button');
+		for(var i = 0; i < 2; i++) {
+			btns_bottom[i].addEventListener('tap', function() {
+				btns_bottom[0].setAttribute('class', 'mui-btn');
+				btns_bottom[1].setAttribute('class', 'mui-btn');
+				this.setAttribute('class', 'mui-btn pitch');
+			})
+		}
+
+		(function($) {
+			$.init();
+			var btns = $('.btn');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					var _self = this;
+					picker.show(function(rs) {
+						document.getElementById(id + '-time').innerText = '' + rs.text;
+						picker.dispose();
+					});
+				}, false);
+			});
+		})(mui);
+
+		function quit_fakeTime_page() {
+			closeWin("fakeTime");
+		}
+	</script>
+
+</html>

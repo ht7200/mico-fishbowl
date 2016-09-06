@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/mui.css" />
+		<link rel="stylesheet" href="../css/person.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<script type="text/javascript" src="../js/api.js"></script>
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-plus mui-statusbar mui-statusbar-offset" style="background: #F9F9F9;">
+			<div class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;" onclick="quit_person_page()"></a>
+				<h1 class="mui-title">个人中心</h1>
+			</div>
+		</header>
+
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>用户名</label>
+					<input type="tel" id="tel" value="18916326189" readonly="readonly">
+				</div>
+			</form>
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>昵&nbsp;&nbsp;&nbsp;称</label>
+					<input id="nicname" type="text" placeholder="未设置">
+				</div>
+				<div class="mui-input-row">
+					<label>姓&nbsp;&nbsp;&nbsp;名</label>
+					<input type="tel" id="tel" placeholder="未设置">
+				</div>
+				<div class="mui-input-row" id="gender-select">
+					<label>性&nbsp;&nbsp;&nbsp;别</label>
+					<div class="mui-input-row mui-radio mui-left">
+						<label>男</label>
+						<input name="radio1" type="radio" value="男">
+					</div>
+					<div class="mui-input-row mui-radio mui-left">
+						<label>女</label>
+						<input name="radio1" type="radio" value="女" checked>
+					</div>
+				</div>
+
+			</form>
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>手机号</label>
+					<input type="text" id="phone" value="18916326189" readonly="readonly">
+				</div>
+				<div class="mui-input-row">
+					<label>邮&nbsp;&nbsp;&nbsp;箱</label>
+					<input id="email" type="tel" id="tel" placeholder="未设置">
+				</div>
+				<div class="mui-input-row">
+					<label>地&nbsp;&nbsp;&nbsp;址</label>
+					<input id="address" type="tel" id="tel" placeholder="未设置">
+				</div>
+			</form>
+			<div class="save-btn">
+				<button id="save" class="mui-btn mui-btn-block mui-btn-primary" onclick="fnchangeUserInfo()">
+					保存修改
+				</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		apiready = function() {
+			gizWifiSDK = api.require('gizWifiSDK');
+			gizWifiDevice = api.require('gizWifiDevice');
+			//获取个人信息
+			fngetUserInfo();
+		}
+	</script>
+	<script type="text/javascript" src="../js/person.js"></script>
+</html>

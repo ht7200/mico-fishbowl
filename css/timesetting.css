@@ -1,0 +1,134 @@
+.mui-bar {
+	height: 3em;
+	font-weight: bolder;
+	background-color: #258AFE;
+	font-family: "黑体";
+}
+
+.mui-title {
+	color: #fff;
+}
+
+.mui-content {
+	margin-top: 63px;
+}
+
+.content-card {
+	padding: .6em;
+}
+
+.content-card h4 {
+	margin-bottom: .7em !important;
+}
+
+.now-status {
+	padding: 0 .5em;
+	font-size: .8em;
+	text-align: center;
+}
+
+.now-status .light-name {
+	font-size: 1.2em;
+	color: #268AFF;
+}
+
+.now-status .num {
+	color: #BDBDBD;
+	margin-left: .1em;
+}
+
+.now-status .unit {
+	color: #268AFF;
+}
+
+.light-box {
+	width: 100%;
+	text-align: left;
+	margin-top: 10px;
+}
+
+.light-box h4 {
+	margin-left: .5em;
+	margin-bottom: 1em;
+}
+
+.light-box-bottom {
+	padding-top: 10px;
+	border-top: 2px solid #BFBFBF;
+}
+
+.range {
+	width: 60%;
+	color: #007AFF;
+	text-align: center;
+	display: inline-block;
+}
+
+.range .icon-taiyang1 {
+	font-size: 1.5em !important;
+}
+
+.range h5 {
+	color: #007AFF;
+	font-size: 1.2em;
+}
+
+.time {
+	display: inline-block;
+	float: right;
+}
+
+.time button {
+	width: 110px;
+	height: 20px;
+	line-height: 0px;
+	color: #9F9F9F;
+}
+
+.time span {
+	color: #268AFF;
+	margin-left: 5px;
+}
+
+.time .mui-switch {
+	margin: 30px auto;
+}
+
+.mui-input-range label~ input[type='range'] {
+	margin-top: 20px;
+	width: 65%;
+}
+
+.quick-setting {
+	color: #007AFF;
+	margin-bottom: .8em;
+}
+
+.quick-setting span {
+	text-align: center;
+	width: 26px;
+	margin-right: .4em;
+	vertical-align: text-top;
+}
+
+.btn-bottom {
+	text-align: center;
+}
+
+.btn-bottom button {
+	width: 100px;
+	margin: 0 10px;
+	border: 1px solid #007AFF;
+	color: #007AFF;
+}
+
+.pitch {
+	background-color: #007AFF;
+	color: #fff !important;
+}
+
+.mui-input-range input[type='range']::-webkit-slider-thumb
+{
+    width: 18px;
+    height: 18px;
+}

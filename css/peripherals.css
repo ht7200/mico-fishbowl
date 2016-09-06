@@ -1,0 +1,32 @@
+.mui-bar {
+	height: 3em;
+	font-weight: bolder;
+	background-color: #258AFE;
+	font-family: "黑体";
+}
+
+.mui-title {
+	color: #fff;
+}
+
+.mui-content {
+	margin-top: 68px;
+}
+#list{
+	margin-bottom: 1em;
+}
+
+.mui-table-view-chevron .mui-table-view-cell {
+    padding-right: 15px;
+}
+.mui-indexed-list-item span {
+	color: #999;
+}
+
+.list-title span {
+	color: #DF5138;
+}
+
+.alias {
+	color: #5DB2FF !important;
+}

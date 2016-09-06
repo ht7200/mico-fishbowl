@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" href="../css/mui.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<script type="text/javascript" src="../js/api.js"></script>
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+		<script src="../js/public.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.mui-content {
+				background: transparent;
+				min-height: 32em;
+			}
+			
+			.content-nodevice {
+				text-align: center;
+				color: #fff;
+				/*display: none;*/
+			}
+			
+			.inner-content {
+				position: absolute;
+				top: 24%;
+				left: 50%;
+				margin-left: -85px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media" onclick="showBrowser('http://buluo.qq.com/p/barindex.html?from=share&bid=189600')">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../img/uVuYibo.jpg">
+						<div class="mui-media-body">
+							养鱼者说
+							<p class='mui-ellipsis'>鱼友互动社区：交流养鱼心得，解答水质净化疑难，分享养鱼技术。</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media"  onclick="showBrowser('http://buluo.qq.com/p/barindex.html?bid=168313')">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../img/RyUw0N.jpg">
+						<div class="mui-media-body">
+							养鱼论坛
+							<p class='mui-ellipsis'>养鱼主题论坛。</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media"  onclick="showBrowser('http://buluo.qq.com/p/barindex.html?bid=18998')">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../img/Q3auHg.jpg">
+						<div class="mui-media-body">
+							海水鱼
+							<p class='mui-ellipsis'>海水鱼俱乐部，欢迎大家一起交流！</p>
+						</div>
+					</a>
+				</li>
+
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var home = "http://www.toutiao.com";
+		var isViewOpened = false;
+		var X5broser = null;
+
+		apiready = function() {
+			X5broser = api.require('webBrowser');
+			api.addEventListener({
+				name: 'keyback'
+			}, function(ret, err) {
+				api.closeWidget();
+			});
+		};
+
+		function showBrowser(iurl) {
+			X5broser.open({
+				url: iurl,
+				progress: {
+					color: '#a4ccfb'
+				},
+				titleBar: {
+					visible: true,
+					bg: '#258AFE',
+					textColor: '#fff'
+				}
+			}, function(ret) {
+				console.log(JSON.stringify(ret));
+			});
+		}
+
+		function showBrowserView() {
+			isViewOpened = true;
+			var iurl = '';
+			X5broser.openView({
+				url: iurl,
+				rect: {
+					marginTop: 100,
+					marginBottom: 50
+				},
+				progress: {
+					color: '#F0F'
+				}
+			}, onBroserStateChange);
+		}
+
+		function closeBrowserView() {
+			isViewOpened = false;
+			X5broser.closeView();
+			$('title').innerHTML = '基于腾讯X5/WKWebview的浏览器';
+		}
+
+		function onBroserStateChange(ret) {
+			if(0 == ret.state) { //BrowserView开始加载
+				var url = ret.url;
+				console.log('BrowserView loading start: ' + url);
+			} else if(1 == ret.state) { //BrowserView加载进度发生变化
+				var p = ret.progress;
+				console.log('BrowserView loading: ' + p);
+			} else if(2 == ret.state) { //BrowserView结束加载
+				var url = ret.url;
+				console.log('BrowserView loading finish: ' + url);
+			} else if(3 == ret.state) { //BrowserView标题发生变化
+				//$('title').innerHTML = ret.title;
+			}
+		}
+
+		function GoToHisBack() {
+			if(isViewOpened) {
+				X5broser.historyBack(function(ret) {
+					if(!ret.status) {
+						api.closeWin();
+						//closeBrowserView();
+					}
+				});
+			}
+
+		}
+
+		function GoToHisBack() {
+			if(isViewOpened) {
+				X5broser.historyBack(function(ret) {
+					if(!ret.status) {
+						//api.closeWin();
+						closeBrowserView();
+					}
+				})
+				return;
+			}
+		}
+
+		function GoToRefresh() {
+			if(!isViewOpened) {
+				api.toast({
+					msg: '还未openView！'
+				});
+				return;
+			}
+			X5broser.loadScript({
+				script: 'location.reload();'
+			});
+		}
+
+		function GoToHome() {
+			if(!isViewOpened) {
+				api.toast({
+					msg: '还未openView！'
+				});
+				return;
+			}
+			X5broser.loadUrl({
+				url: home
+			});
+		}
+	</script>
+
+</html>
